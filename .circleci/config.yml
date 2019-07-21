@@ -8,8 +8,6 @@ jobs:
     machine: true
     steps:
       - checkout
-      - run: mkdir swagger
-      - run: docker run --rm -v ${PWD}:/local swaggerapi/swagger-codegen-cli generate -i /local/swagger.yaml -l nodejs-server -o /local/swagger
+      - run: docker run --rm -v ${PWD}:/local swaggerapi/swagger-codegen-cli generate -i /local/swagger.yaml -l nodejs-server -o /local/swagger-ui
       - gcp-cli/initialize
-      - run: cp ./app.yaml swagger/app.yaml
-      - run: gcloud app deploy swagger/app.yaml
+      - run: gcloud app deploy swagger-ui/app.yaml
